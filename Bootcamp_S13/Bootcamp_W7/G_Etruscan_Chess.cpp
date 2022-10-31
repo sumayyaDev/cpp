@@ -1,29 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define MAX 500000
-ll arr[MAX];
-ll findingIndx(ll n)
-{
-    arr[0]=1;
-    ll curr=arr[0];
-    if(curr==n)  return 1;
-    for(ll i=1; i<MAX; i++){
-       arr[i]= i+1;
-       curr += arr[i];
-       if(curr==n){
-         return i+1;
-       }
-       else if(curr<n){
-          continue;
-       }
-       else if(curr>n){
-           return i;
-       }
-    }
-    return -1;
+const ll MAX=1e10;
 
+ll binary_search_indx(ll n)
+{
+    ll left=0;
+    ll right=MAX, mid;
+    while(left<right){
+        mid=(left+right+1)/2;
+        if(mid*(mid+1)/2  > n)
+            right=mid-1;
+        else left=mid;
+    }
+    return left;
 }
+
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -33,7 +25,9 @@ int main(){
     while(t--){
     ll n; //no. of warriors
     cin>> n;
-    cout << findingIndx(n) <<endl;
+
+    cout<< binary_search_indx(n) << "\n";
+
    }
    return 0;
 }
