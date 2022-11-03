@@ -1,32 +1,44 @@
 #include<bits/stdc++.h>
-#define endl "\n";
+#define endl "\n"
+#define ll long long
 using namespace std;
-int main(){
 
-    int t; cin>>t;
+const ll MAX=1e7;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t; cin>> t;
     while(t--){
-        int m, n;
-        cin>> m >> n;
-        vector<int> v1;
-        vector<int> v2;
-        for(int i=0; i<m; i++){
-            int x; cin>>x;
-            v1.push_back(x);
-        }
-        for(int i=0; i<n; i++){
-            int x; cin>>x;
-            v2.push_back(x);
-        }
+       int n, m;
+       cin>> n >> m;
+       map<int, int> mp; //num, it's occurrance
 
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                if(v1[i]==v1[j]){
-                    v1.pop_back();
-                }
-            }
-        }
+       int x;
+       for(int i=0; i<n; i++){
+           cin>> x;
+           mp[x]++;
+       }
+       for(int i=0; i<m; i++){
+           cin>> x;
+           mp[x]--;
+       }
+
+       int cnt=0;
+       for(auto it : mp){
+           if(it.second!=0){ //if occurrance not zero
+              cnt += abs(it.second);
+           }
+       }
+
+       cout<< cnt << "\n";
 
     }
 
-  return 0;
+    return 0;
 }
+
+
+
